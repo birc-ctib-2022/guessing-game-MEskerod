@@ -49,27 +49,10 @@ print("Let me know how good my guess is.\n")
 #    2print("I must have been too high, right?", result)
 
 #Third algorithm 
-def find_middle(given_list: list) -> int:
-    """Find the middle index of a given list
-    If the list contains and even number find_middle should return
-    the lowest of the two middle values
-    
-    >>> find_middle([1,2,3,4,5])
-    2
-    
-    >>> find_middle([1,2,3,4,5,6,7,8]
-    3"""
-
-    if len(given_list) % 2 == 0:
-        middle_index = (len(given_list)-2)//2
-    else: 
-        middle_index = (len(given_list)-1)//2
-    return middle_index
-
-guesses=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+lower_bound = 1
+upper_bound = 20
 while True:
-    middle = find_middle(guesses)
-    guess = guesses[middle]
+    guess = (upper_bound + lower_bound) // 2
     result = input_selection(
         "I'm guessing {}\nHow is my guess?".format(guess),
         ["low","hit","high"]
@@ -78,6 +61,6 @@ while True:
         print("Wuhuu!")
         break
     if result == "high":
-        guesses = guesses[:middle]
+        upper_bound = guess - 1
     if result == "low":
-        guesses = guesses[middle+1:]
+        lower_bound = guess + 1
